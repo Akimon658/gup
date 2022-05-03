@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"github.com/nao1215/gup/internal/assets"
-	"github.com/nao1215/gup/internal/completion"
-	"github.com/nao1215/gup/internal/print"
+	"github.com/Akimon658/gup/internal/assets"
+	"github.com/Akimon658/gup/internal/completion"
+	"github.com/Akimon658/gup/internal/print"
 	"github.com/spf13/cobra"
 )
 

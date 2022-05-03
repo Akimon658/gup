@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/nao1215/gup/internal/goutil"
-	"github.com/nao1215/gup/internal/print"
+	"github.com/Akimon658/gup/internal/goutil"
+	"github.com/Akimon658/gup/internal/print"
 	"github.com/spf13/cobra"
 )
 

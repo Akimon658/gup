@@ -1,14 +1,12 @@
-[![Build](https://github.com/nao1215/gup/actions/workflows/build.yml/badge.svg)](https://github.com/nao1215/gup/actions/workflows/build.yml)
-[![UnitTest](https://github.com/nao1215/gup/actions/workflows/unit_test.yml/badge.svg)](https://github.com/nao1215/gup/actions/workflows/unit_test.yml)
-[![reviewdog](https://github.com/nao1215/gup/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/nao1215/gup/actions/workflows/reviewdog.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/nao1215/gup)](https://goreportcard.com/report/github.com/nao1215/gup)
-![GitHub](https://img.shields.io/github/license/nao1215/gup)  
+[![UnitTest](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml/badge.svg)](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Akimon658/gup)](https://goreportcard.com/report/github.com/Akimon658/gup)
+![GitHub](https://img.shields.io/github/license/Akimon658/gup)  
 [[日本語](./doc/ja/README.md)]  
   
 # gup - Update binaries installed by "go install"  
 ![demo](./doc/img/demo.gif)  
   
-**gup** command update binaries installed by "go install" to the latest version. gup updates all binaries in parallel, so very fast. It also provides subcommands for manipulating binaries under \$GOPATH/bin (\$GOBIN). It is a cross-platform software that runs on Windows, Mac and Linux. [The release page](https://github.com/nao1215/gup/releases) contains packages in .deb, .rpm, and .apk formats.  
+**gup** command update binaries installed by "go install" to the latest version. gup updates all binaries in parallel, so very fast. It also provides subcommands for manipulating binaries under \$GOPATH/bin (\$GOBIN). It is a cross-platform software that runs on Windows, Mac and Linux. [The release page](https://github.com/Akimon658/gup/releases) contains packages in .deb, .rpm, and .apk formats.  
   
 ![sample](./doc/img/sample.png)
 
@@ -22,7 +20,7 @@ gup command only supports installation with `$ go install`. If you does not have
 
 ### Step2. Install gup
 ```
-$ go install github.com/nao1215/gup@latest
+$ go install github.com/Akimon658/gup@latest
 ```
 # How to use
 ### Update all binaries
@@ -46,7 +44,7 @@ If you want to update only the specified binaries, you specify multiple command 
 ```
 $ gup update subaru gup ubume
 gup:INFO : update binary under $GOPATH/bin or $GOBIN
-gup:INFO : [1/3] github.com/nao1215/gup (v0.7.0 to v0.7.1)
+gup:INFO : [1/3] github.com/Akimon658/gup (v0.7.0 to v0.7.1)
 gup:INFO : [2/3] github.com/nao1215/subaru (Already up-to-date: v1.0.2)
 gup:INFO : [3/3] github.com/nao1215/ubume/cmd/ubume (Already up-to-date: v1.4.1)
 ```
@@ -124,14 +122,11 @@ gup:INFO : create zsh-completion file: /home/nao/.zsh/completion/_gup
 
 # Contributing
 First off, thanks for taking the time to contribute! ❤️  See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
-Contributions are not only related to development. For example, GitHub Star motivates me to develop!
-[![Star History Chart](https://api.star-history.com/svg?repos=nao1215/gup&type=Date)](https://star-history.com/#nao1215/gup&Date)
 
 # Contact
 If you would like to send comments such as "find a bug" or "request for additional features" to the developer, please use one of the following contacts.
 
-- [GitHub Issue](https://github.com/nao1215/gup/issues)
+- [GitHub Issue](https://github.com/Akimon658/gup/issues)
 
 # LICENSE
 The gup project is licensed under the terms of [the Apache License 2.0](./LICENSE).
-

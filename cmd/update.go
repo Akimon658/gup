@@ -8,10 +8,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/nao1215/gup/internal/goutil"
-	"github.com/nao1215/gup/internal/notify"
-	"github.com/nao1215/gup/internal/print"
-	"github.com/nao1215/gup/internal/slice"
+	"github.com/Akimon658/gup/internal/goutil"
+	"github.com/Akimon658/gup/internal/notify"
+	"github.com/Akimon658/gup/internal/print"
+	"github.com/Akimon658/gup/internal/slice"
 	"github.com/spf13/cobra"
 )
 

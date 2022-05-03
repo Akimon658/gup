@@ -1,9 +1,9 @@
 package notify
 
 import (
+	"github.com/Akimon658/gup/internal/assets"
+	"github.com/Akimon658/gup/internal/print"
 	"github.com/gen2brain/beeep"
-	"github.com/nao1215/gup/internal/assets"
-	"github.com/nao1215/gup/internal/print"
 )
 
 // Info notify information message at desktop

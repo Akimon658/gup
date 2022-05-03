@@ -1,6 +1,6 @@
 package main
 
-import "github.com/nao1215/gup/cmd"
+import "github.com/Akimon658/gup/cmd"
 
 func main() {
 	cmd.Execute()

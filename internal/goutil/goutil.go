@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/Akimon658/gup/internal/print"
 	"github.com/fatih/color"
-	"github.com/nao1215/gup/internal/print"
 )
 
 // GoPaths has $GOBIN and $GOPATH
@@ -259,11 +259,11 @@ func GetPackageVersion(cmdName string) string {
 	for _, v := range out {
 		vv := strings.TrimSpace(v)
 		if len(v) != len(vv) && strings.HasPrefix(vv, "mod") {
-			//         mod     github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//         mod     github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			v = strings.TrimLeft(vv, "mod")
 			v = strings.TrimSpace(v)
 
-			//github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			r := regexp.MustCompile(`^[^\s]+(\s)`)
 			v = r.ReplaceAllString(v, "")
 
@@ -295,11 +295,11 @@ func extractModulePath(lines []string) string {
 	for _, v := range lines {
 		vv := strings.TrimSpace(v)
 		if len(v) != len(vv) && strings.HasPrefix(vv, "mod") {
-			//         mod     github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//         mod     github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			v = strings.TrimLeft(vv, "mod")
 			v = strings.TrimSpace(v)
 
-			//github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			r := regexp.MustCompile(`(\s).*$`)
 			return r.ReplaceAllString(v, "")
 		}

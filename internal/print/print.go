@@ -5,9 +5,9 @@ import (
 	"os"
 	"strings"
 
+	"github.com/Akimon658/gup/internal/cmdinfo"
 	"github.com/fatih/color"
 	"github.com/mattn/go-colorable"
-	"github.com/nao1215/gup/internal/cmdinfo"
 )
 
 var (

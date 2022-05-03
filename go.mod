@@ -1,4 +1,4 @@
-module github.com/nao1215/gup
+module github.com/Akimon658/gup
 
 go 1.18
 

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/nao1215/gup/internal/config"
-	"github.com/nao1215/gup/internal/file"
-	"github.com/nao1215/gup/internal/print"
+	"github.com/Akimon658/gup/internal/config"
+	"github.com/Akimon658/gup/internal/file"
+	"github.com/Akimon658/gup/internal/print"
 	"github.com/spf13/cobra"
 )
 

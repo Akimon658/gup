@@ -8,9 +8,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/nao1215/gup/internal/cmdinfo"
-	"github.com/nao1215/gup/internal/file"
-	"github.com/nao1215/gup/internal/goutil"
+	"github.com/Akimon658/gup/internal/cmdinfo"
+	"github.com/Akimon658/gup/internal/file"
+	"github.com/Akimon658/gup/internal/goutil"
 )
 
 // FilePath return configuration-file path.
