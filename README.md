@@ -20,6 +20,8 @@ gup command will notify you on your desktop whether the update was successful or
 ![success](./doc/img/notify_success.png)
 ![warning](./doc/img/notify_warning.png)
 
+This is a fork of [nao1215/gup](https://github.com/nao1215/gup) that focuses on simplicity.
+
 # How to install
 
 ### Step1. Install Golang
