@@ -1,28 +1,41 @@
 [![UnitTest](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml/badge.svg)](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml)
 [![reviewdog](https://github.com/Akimon658/gup/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/Akimon658/gup/actions/workflows/reviewdog.yml)
-  
-# gupとは  
-![demo](../img/demo.gif)  
-  
-**gup**コマンドは、"go install"でインストールしたバイナリを最新版にアップデートします。gupは、すべてのバイナリを並列にアップデートするので、非常に高速です。\$GOPATH/bin (\$GOBIN) 以下にあるバイナリを操作するためのサブコマンドも提供しています。クロスプラットホームソフトであり、Windows, Mac, Linux で動作します。日本語版のみ、[Zenn](https://zenn.dev/articles/aef3fe318848d6/edit)に補足記事があります。
-  
+
+# gup とは 
+
+![demo](../img/demo.gif)
+
+**gup**コマンドは、`go install` でインストールしたバイナリを最新版にアップデートします。
+gup は、すべてのバイナリを並列にアップデートするので、非常に高速です。
+\$GOPATH/bin (\$GOBIN) 以下にあるバイナリを操作するためのサブコマンドも提供しています。
+クロスプラットホームソフトであり、Windows、Mac、Linux で動作します。
+日本語版のみ、[Zenn](https://zenn.dev/articles/aef3fe318848d6/edit) に補足記事があります。
+
 ![sample](../img/sample.png)
 
-gupコマンドはアップデートが終わった後、成功したか失敗したかをデスクトップ通知します。  
+gup コマンドはアップデートが終わった後、成功したか失敗したかをデスクトップ通知します。
+
 ![success](..//img/notify_success.png)
 ![warning](../img/notify_warning.png)
+
 # インストール方法
+
 ### Step1. 前準備
-現在は、" $ go install"によるインストールのみをサポートしています。そのため、golangの開発環境をシステムにインストールしていない場合、[golang公式サイト](https://go.dev/doc/install)からgolangをインストールしてください。
+
+現在は、`go install` によるインストールのみをサポートしています。
+そのため、Golang の開発環境をシステムにインストールしていない場合、[Golang 公式サイト](https://go.dev/doc/install)から Golang をインストールしてください。
 
 ### Step2. インストール
+
 ```
 $ go install github.com/Akimon658/gup@latest
 ```
 
 # 使用方法
+
 ### 全てのバイナリをアップデート
-全てのバイナリをアップデートしたい場合は、`$ gup update`を実行してください。
+
+全てのバイナリをアップデートしたい場合は、`gup update`を実行してください。
 
 ```
 $ gup update
@@ -36,8 +49,11 @@ gup:INFO : [ 6/30] github.com/git-chglog/git-chglog/cmd/git-chglog (Already up-t
    :
    :
 ```
+
 ### 指定バイナリのみアップデート
-指定のバイナリのみを更新したい場合、updateサブコマンドに複数のコマンド名をスペース区切りで渡してください。
+
+指定のバイナリのみを更新したい場合、`update` サブコマンドに複数のコマンド名をスペース区切りで渡してください。
+
 ```
 $ gup update subaru gup ubume
 gup:INFO : update binary under $GOPATH/bin or $GOBIN
@@ -45,13 +61,19 @@ gup:INFO : [1/3] github.com/Akimon658/gup (v0.7.0 to v0.7.1)
 gup:INFO : [2/3] github.com/Akimon658/subaru (Already up-to-date: v1.0.2)
 gup:INFO : [3/3] github.com/nao1215/ubume/cmd/ubume (Already up-to-date: v1.4.1)
 ```
-### $GOPATH/bin以下にあるバイナリ情報の一覧出力
-listサブコマンドは、$GOPATH/bin（もしくは$GOBIN）以下にあるバイナリの情報を表示します。表示内容は、コマンド名、パッケージパス、コマンドバージョンです。
+
+### $GOPATH/bin 以下にあるバイナリ情報の一覧出力
+
+`list` サブコマンドは、$GOPATH/bin（もしくは $GOBIN）以下にあるバイナリの情報を表示します。
+表示内容は、コマンド名、パッケージパス、コマンドバージョンです。
 
 ![sample](../img/list.png)
 
 ### 指定バイナリを削除
-\$GOPATH/bin (\$GOBIN) 以下にあるバイナリを削除する場合は、remove サブコマンドを使用してください。remove サブコマンドは、削除前に削除してよいかどうかを確認します。
+
+\$GOPATH/bin (\$GOBIN) 以下にあるバイナリを削除する場合は、`remove` サブコマンドを使用してください。
+`remove` サブコマンドは、削除前に削除してよいかどうかを確認します。
+
 ```
 $ gup remove subaru gal ubume
 gup:CHECK: remove /home/nao/.go/bin/subaru? [Y/n] Y
@@ -62,14 +84,19 @@ gup:CHECK: remove /home/nao/.go/bin/ubume? [Y/n] Y
 gup:INFO : removed /home/nao/.go/bin/ubume
 ```
 
-確認無しで削除したい場合は, --forceオプションを使用してください。
+確認無しで削除したい場合は, `--force` オプションを使用してください。
+
 ```
 $ gup remove --force gal
 gup:INFO : removed /home/nao/.go/bin/gal
 ```
 
 ### バイナリが最新版かどうかのチェック
-バイナリが最新版かどうかを知りたい場合は、checkサブコマンドを使用してください。checkサブコマンドは、バイナリが最新バージョンかどうかをチェックし、アップデートが必要なバイナリ名を表示します。しかし、更新はしません。
+
+バイナリが最新版かどうかを知りたい場合は、`check` サブコマンドを使用してください。
+`check` サブコマンドは、バイナリが最新バージョンかどうかをチェックし、アップデートが必要なバイナリ名を表示します。
+しかし、更新はしません。
+
 ```
 $ gup check
 gup:INFO : check binary under $GOPATH/bin or $GOBIN
@@ -81,8 +108,9 @@ gup:INFO : [33/33] github.com/nao1215/ubume (Already up-to-date: v1.5.0)
 gup:INFO : If you want to update binaries, the following command.
            $ gup update fyne_demo gup mimixbox 
 ```
-  
+
 他のサブコマンドと同様、指定のバイナリのみをチェックする事もできます。
+
 ```
 $ gup check lazygit mimixbox
 gup:INFO : check binary under $GOPATH/bin or $GOBIN
@@ -94,30 +122,30 @@ gup:INFO : If you want to update binaries, the following command.
 ```
 
 ### エクスポート／インポートサブコマンド
-複数のシステム間で、$GOPATH/bin（もしくは$GOBIN）以下にあるバイナリを揃えたい場合、export／importサブコマンドを使ってください。exportサブコマンドは、$HOME/.config/gup/gup.confファイルを生成し、このファイル内にはシステムにインストール済みのコマンド情報が記載されています。  
-別のシステム環境に$HOME/.config/gup/gup.confファイルを同じ階層にコピーした後、importサブコマンドを実行してください。gupコマンドは、gup.confの内容に従ってインストールを開始します。
+
+複数のシステム間で、$GOPATH/bin（もしくは$GOBIN）以下にあるバイナリを揃えたい場合、`export`/`import`サブコマンドを使ってください。
+`export` サブコマンドは、$HOME/.config/gup/gup.conf ファイルを生成し、このファイル内にはシステムにインストール済みのコマンド情報が記載されています。  
+別のシステム環境に$HOME/.config/gup/gup.conf ファイルを同じ階層にコピーした後、`import` サブコマンドを実行してください。
+gup コマンドは、gup.conf の内容に従ってインストールを開始します。
+
 ```
-※ 環境A (e.g. ubuntu)
+※ 環境 A (e.g. ubuntu)
 $ gup export
 gup:INFO: Export /home/nao/.config/gup/gup.conf
 
-※ 環境B (e.g. debian)
+※ 環境 B (e.g. debian)
 $ ls /home/nao/.config/gup/gup.conf
 /home/nao/.config/gup/gup.conf
 $ gup import
 ```
 
-### シェル補完ファイルの自動生成 (bash, zsh, fish)
-gupコマンドは、bash、zsh、fish向けのシェル補完ファイルを自動生成します。ユーザーがgupを実行した後、シェル補完ファイルがシステムに存在しない場合は、自動生成処理を開始します。シェル補完を有効にするには、シェルを再起動してください。
-```
-$ gup 
-gup:INFO : create bash-completion file: /home/nao/.bash_completion
-gup:INFO : create fish-completion file: /home/nao/.config/fish/completions/gup.fish
-gup:INFO : create zsh-completion file: /home/nao/.zsh/completion/_gup
-```
 # 連絡先
-開発者に対して「バグ報告」や「機能の追加要望」がある場合は、コメントをください。その際、以下の連絡先を使用してください。
+
+開発者に対して「バグ報告」や「機能の追加要望」がある場合は、コメントをください。
+その際、以下の連絡先を使用してください。
+
 - [GitHub Issue](https://github.com/Akimon658/gup/issues)
 
 # ライセンス
-gupプロジェクトは、[Apache License 2.0条文](./../../LICENSE)の下でライセンスされています。
+
+gupプロジェクトは、[Apache License 2.0](./../../LICENSE) の下でライセンスされています。

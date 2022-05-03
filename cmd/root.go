@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"github.com/Akimon658/gup/internal/assets"
-	"github.com/Akimon658/gup/internal/completion"
-	"github.com/Akimon658/gup/internal/print"
 	"github.com/spf13/cobra"
+
+	"github.com/Akimon658/gup/internal/assets"
+	"github.com/Akimon658/gup/internal/print"
 )
 
 var rootCmd = &cobra.Command{
@@ -16,9 +16,7 @@ If you update all binaries, just run '$ gup update'`,
 // Execute run gup process.
 func Execute() {
 	assets.DeployIconIfNeeded()
-	completion.DeployShellCompletionFileIfNeeded(rootCmd)
 
-	rootCmd.CompletionOptions.DisableDefaultCmd = true
 	if err := rootCmd.Execute(); err != nil {
 		print.Err(err)
 	}
