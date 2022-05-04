@@ -1,0 +1,42 @@
+categories:
+  - title: Features
+    label: enhancement
+
+  - title: Bug Fixes
+    label: bug
+
+  - title: Docs
+    label: docs
+
+  - title: Dependencies
+    collapse-after: 3
+    label: dependencies
+
+category-template: '### $TITLE'
+
+exclude-contributors:
+  - Akimon658
+  - dependabot
+
+exclude-labels: [ github_actions ]
+
+name-template: v$RESOLVED_VERSION
+no-changes-template: No changes.
+tag-template: v$RESOLVED_VERSION
+
+template: |
+  ## Changes
+
+  $CHANGES
+
+version-resolver:
+  major:
+    labels: [ major ]
+
+  minor:
+    labels: [ minor ]
+
+  patch:
+    labels: [ patch ]
+
+  default: patch
