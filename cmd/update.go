@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/Akimon658/gup/internal/goutil"
-	"github.com/Akimon658/gup/internal/notify"
 	"github.com/Akimon658/gup/internal/print"
 	"github.com/Akimon658/gup/internal/slice"
 	"github.com/spf13/cobra"
@@ -71,7 +70,6 @@ func update(pkgs []goutil.Package, dryRun bool) int {
 	if dryRun {
 		if err := dryRunManager.StartDryRunMode(); err != nil {
 			print.Err(fmt.Errorf("can not change to dry run mode: %w", err))
-			notify.Warn("gup", "Can not change to dry run mode")
 			return 1
 		}
 		signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM, syscall.SIGHUP,
@@ -123,11 +121,6 @@ func update(pkgs []goutil.Package, dryRun bool) int {
 		close(signals)
 	}
 
-	if result == 0 {
-		notify.Info("gup", "All update success")
-	} else {
-		notify.Warn("gup", "Some package can't update")
-	}
 	return result
 }
 

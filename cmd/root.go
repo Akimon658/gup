@@ -3,7 +3,6 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/Akimon658/gup/internal/assets"
 	"github.com/Akimon658/gup/internal/print"
 )
 
@@ -15,8 +14,6 @@ If you update all binaries, just run '$ gup update'`,
 
 // Execute run gup process.
 func Execute() {
-	assets.DeployIconIfNeeded()
-
 	if err := rootCmd.Execute(); err != nil {
 		print.Err(err)
 	}
