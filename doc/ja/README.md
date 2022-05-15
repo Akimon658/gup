@@ -13,11 +13,6 @@ gup は、すべてのバイナリを並列にアップデートするので、�
 
 ![sample](../img/sample.png)
 
-gup コマンドはアップデートが終わった後、成功したか失敗したかをデスクトップ通知します。
-
-![success](..//img/notify_success.png)
-![warning](../img/notify_warning.png)
-
 これは [nao1215/gup](https://github.com/nao1215/gup) のシンプルさに重点を置いたフォークです。
 
 # インストール方法

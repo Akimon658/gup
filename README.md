@@ -15,11 +15,6 @@ It is a cross-platform software that runs on Windows, Mac and Linux.
 
 ![sample](./doc/img/sample.png)
 
-gup command will notify you on your desktop whether the update was successful or unsuccessful after the update was finished.  
-
-![success](./doc/img/notify_success.png)
-![warning](./doc/img/notify_warning.png)
-
 This is a fork of [nao1215/gup](https://github.com/nao1215/gup) that focuses on simplicity.
 
 # How to install
