@@ -2,20 +2,19 @@ package cmdinfo
 
 import (
 	"fmt"
+	"runtime/debug"
 )
 
-const (
-	name    = "gup"
-	version = "0.10.3"
-)
+const Name = "gup"
 
 // Version return gup command version.
 func Version() string {
-	return fmt.Sprintf("%s version %s (under Apache License version 2.0)",
-		Name(), version)
-}
+	version := "unknown"
 
-// Name return command name.
-func Name() string {
-	return name
+	info, ok := debug.ReadBuildInfo()
+	if ok {
+		version = info.Main.Version
+	}
+
+	return fmt.Sprintf("%s version %s (under Apache License version 2.0)", Name, version)
 }
