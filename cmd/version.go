@@ -3,13 +3,14 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/Akimon658/gup/internal/cmdinfo"
 	"github.com/spf13/cobra"
+
+	"github.com/Akimon658/gup/internal/cmdinfo"
 )
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Show " + cmdinfo.Name() + " command version information",
+	Short: "Show " + cmdinfo.Name + " command version information",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(cmdinfo.Version())
 	},
