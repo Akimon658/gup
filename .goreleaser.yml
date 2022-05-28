@@ -1,10 +1,13 @@
 project_name: gup
+
 env:
   - GO111MODULE=on
+
 before:
   hooks:
     - go mod tidy
     - go generate ./...
+
 builds:
   - main: .
     ldflags:
@@ -15,33 +18,38 @@ builds:
       - linux
       - windows
       - darwin
+
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     replacements:
-      darwin: Darwin
+      darwin: macOS
       linux: Linux
       windows: Windows
-      386: i386
-      amd64: x86_64
+      386: 32bit
+      amd64: 64bit
     format_overrides:
       - goos: windows
         format: zip
+
 checksum:
-  name_template: "checksums.txt"
+  name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
+
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
-changelog:
-  sort: asc
-  filters:
-    exclude:
-      - "^docs:"
-      - "^test:"
+
 nfpms:
-  - maintainer: Naohiro CHIKAMATSU <n.chika156@gmail.com>
+  - maintainer: Akimo <akimo_greninja@yahoo.co.jp>
     description: gup - Update binaries installed by "go install"
-    homepage: https://github.com/nao1215/gup
+    homepage: https://github.com/Akimon658/gup
     license: Apache License 2.0
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     formats:
       - deb
       - rpm
       - apk
+    replacements:
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      386: 32bit
+      amd64: 64bit
