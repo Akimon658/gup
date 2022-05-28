@@ -11,7 +11,7 @@ before:
 builds:
   - main: .
     ldflags:
-      - -s -w
+      - -s -w -X github.com/harakeishi/curver.Version=v{{ .Version }}
     env:
       - CGO_ENABLED=0
     goos:
