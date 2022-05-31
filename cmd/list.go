@@ -5,10 +5,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/Akimon658/gup/internal/goutil"
-	"github.com/Akimon658/gup/internal/print"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
+
+	"github.com/Akimon658/gup/internal/goutil"
+	"github.com/Akimon658/gup/internal/print"
 )
 
 var listCmd = &cobra.Command{
@@ -25,10 +26,6 @@ func init() {
 }
 
 func list(cmd *cobra.Command, args []string) int {
-	if err := goutil.CanUseGoCmd(); err != nil {
-		print.Fatal(fmt.Errorf("%s: %w", "you didn't install golang", err))
-	}
-
 	pkgs, err := getPackageInfo()
 	if err != nil {
 		print.Fatal(err)

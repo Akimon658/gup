@@ -10,8 +10,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/Akimon658/gup/internal/print"
 	"github.com/fatih/color"
+
+	"github.com/Akimon658/gup/internal/print"
 )
 
 // GoPaths has $GOBIN and $GOPATH
@@ -140,12 +141,6 @@ func (gp *GoPaths) removeTmpDir() error {
 		}
 	}
 	return nil
-}
-
-// CanUseGoCmd check whether go command install in the system.
-func CanUseGoCmd() error {
-	_, err := exec.LookPath("go")
-	return err
 }
 
 // Install execute "$ go install <importPath>@latest"
