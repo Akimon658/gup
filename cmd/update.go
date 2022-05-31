@@ -8,10 +8,11 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/spf13/cobra"
+
 	"github.com/Akimon658/gup/internal/goutil"
 	"github.com/Akimon658/gup/internal/print"
 	"github.com/Akimon658/gup/internal/slice"
-	"github.com/spf13/cobra"
 )
 
 var updateCmd = &cobra.Command{
@@ -37,10 +38,6 @@ func gup(cmd *cobra.Command, args []string) int {
 	dryRun, err := cmd.Flags().GetBool("dry-run")
 	if err != nil {
 		print.Fatal(fmt.Errorf("%s: %w", "can not parse command line argument (--dry-run)", err))
-	}
-
-	if err := goutil.CanUseGoCmd(); err != nil {
-		print.Fatal(fmt.Errorf("%s: %w", "you didn't install golang", err))
 	}
 
 	pkgs, err := getPackageInfo()

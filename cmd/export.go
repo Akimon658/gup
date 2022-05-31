@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/spf13/cobra"
+
 	"github.com/Akimon658/gup/internal/config"
 	"github.com/Akimon658/gup/internal/goutil"
 	"github.com/Akimon658/gup/internal/print"
-	"github.com/spf13/cobra"
 )
 
 var exportCmd = &cobra.Command{
@@ -31,10 +32,6 @@ func init() {
 }
 
 func export(cmd *cobra.Command, args []string) int {
-	if err := goutil.CanUseGoCmd(); err != nil {
-		print.Fatal(fmt.Errorf("%s: %w", "you didn't install golang", err))
-	}
-
 	if err := os.MkdirAll(config.DirPath(), 0775); err != nil {
 		print.Err(fmt.Errorf("%s: %w", "can not make config directory", err))
 	}
