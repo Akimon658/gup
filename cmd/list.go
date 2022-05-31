@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"os"
+	"log"
 	"strconv"
 
 	"github.com/fatih/color"
@@ -10,33 +10,47 @@ import (
 
 	"github.com/Akimon658/gup/internal/goutil"
 	"github.com/Akimon658/gup/internal/print"
+	ls "github.com/Akimon658/gup/list"
 )
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "List up command name with package path and version under $GOPATH/bin or $GOBIN",
-	Long:  `List up command name with package path and version under $GOPATH/bin or $GOBIN`,
+	Short: "List installed commands",
+	Long:  "List informations of installed commands",
 	Run: func(cmd *cobra.Command, args []string) {
-		os.Exit(list(cmd, args))
+		listImportPaths, err := cmd.Flags().GetBool("import-path")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if err := list(listImportPaths); err != nil {
+			log.Fatal(err)
+		}
 	},
 }
 
 func init() {
+	listCmd.Flags().Bool("import-path", false, "print import paths only")
 	rootCmd.AddCommand(listCmd)
 }
 
-func list(cmd *cobra.Command, args []string) int {
+func list(listImportPaths bool) error {
 	pkgs, err := getPackageInfo()
 	if err != nil {
-		print.Fatal(err)
+		return err
 	}
 
 	if len(pkgs) == 0 {
 		print.Fatal("unable to list up package: no package information")
 	}
-	printPackageList(pkgs)
 
-	return 0
+	if listImportPaths {
+		fmt.Println(ls.ImportPaths(pkgs))
+	} else {
+		printPackageList(pkgs)
+	}
+
+	return nil
 }
 
 // PackageList list up command package in $GOPATH/bin or $GOBIN
