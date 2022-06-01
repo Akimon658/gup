@@ -2,6 +2,9 @@ categories:
   - title: Features
     label: enhancement
 
+  - title: Behavior Changes
+    label: behavior
+
   - title: Bug Fixes
     label: bug
 
