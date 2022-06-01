@@ -1,0 +1,5 @@
+behavior: behavior/*
+bug: fix/*
+docs: [ doc/*, docs/* ]
+enhancement: [ feat/*, feature/* ]
+github_actions: ci/*

@@ -3,7 +3,6 @@ name: Draft release
 on:
   push:
     branches: [ main ]
-    pull_request:
 
 jobs:
   update_draft:
