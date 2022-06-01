@@ -6,7 +6,7 @@ import (
 	"github.com/Akimon658/gup/internal/goutil"
 )
 
-func ImportPaths(pkgs []goutil.Package) string {
+func PackagePaths(pkgs []goutil.Package) string {
 	var sb strings.Builder
 
 	for i := range pkgs {
