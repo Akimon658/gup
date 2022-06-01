@@ -1,27 +1,29 @@
 package cmd
 
 import (
-	"fmt"
+	"bufio"
+	"errors"
+	"log"
 	"os"
 
-	"github.com/Akimon658/gup/internal/config"
-	"github.com/Akimon658/gup/internal/file"
-	"github.com/Akimon658/gup/internal/print"
 	"github.com/spf13/cobra"
+
+	"github.com/Akimon658/gup/internal/goutil"
 )
 
 var importCmd = &cobra.Command{
 	Use:   "import",
-	Short: "Install command according to gup.conf.",
-	Long: `Install command according to gup.conf.
-
-Use the export subcommand if you want to install the same golang
-binaries across multiple systems. After you create gup.conf by 
-import subcommand in another environment, you save conf-file in
-$HOME/.config/gup/gup.conf.
-Finally, you execute the export subcommand in this state.`,
+	Short: "Import commands from a file",
+	Long: `Import commands from a file.
+Use "gup export" to generate a file`,
 	Run: func(cmd *cobra.Command, args []string) {
-		os.Exit(runImport(cmd, args))
+		dryRun, err := cmd.Flags().GetBool("dry-run")
+		if err != nil {
+			log.Fatal(err)
+		}
+		if err := runImport(args[0], dryRun); err != nil {
+			log.Fatal(err)
+		}
 	},
 }
 
@@ -30,25 +32,31 @@ func init() {
 	rootCmd.AddCommand(importCmd)
 }
 
-func runImport(cmd *cobra.Command, args []string) int {
-	dryRun, err := cmd.Flags().GetBool("dry-run")
+func runImport(path string, dryRun bool) error {
+	f, err := os.Open(path)
 	if err != nil {
-		print.Fatal(fmt.Errorf("%s: %w", "can not parse command line argument", err))
+		return err
 	}
+	defer f.Close()
 
-	if !file.IsFile(config.FilePath()) {
-		print.Fatal(fmt.Errorf("%s is not found", config.FilePath()))
-	}
+	scanner := bufio.NewScanner(f)
 
-	pkgs, err := config.ReadConfFile()
-	if err != nil {
-		print.Fatal(err)
+	var pkgs []goutil.Package
+	for scanner.Scan() {
+		pkg := goutil.Package{
+			ImportPath: scanner.Text(),
+			Version:    &goutil.Version{Current: "<from import>"},
+		}
+		pkgs = append(pkgs, pkg)
 	}
 
 	if len(pkgs) == 0 {
-		print.Fatal("unable to update package: no package information")
+		return errors.New("given file is empty")
 	}
 
-	print.Info("start update based on " + config.FilePath())
-	return update(pkgs, dryRun)
+	if code := update(pkgs, dryRun); code != 0 {
+		return errors.New("failed to import packages")
+	}
+
+	return nil
 }

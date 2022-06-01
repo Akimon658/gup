@@ -14,5 +14,5 @@ func ImportPaths(pkgs []goutil.Package) string {
 		sb.WriteString("\n")
 	}
 
-	return sb.String()
+	return strings.TrimSuffix(sb.String(), "\n")
 }
