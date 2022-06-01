@@ -17,24 +17,25 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List installed commands",
 	Long:  "List informations of installed commands",
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
-		listImportPaths, err := cmd.Flags().GetBool("import-path")
+		listPackagePaths, err := cmd.Flags().GetBool("package-path")
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		if err := list(listImportPaths); err != nil {
+		if err := list(listPackagePaths); err != nil {
 			log.Fatal(err)
 		}
 	},
 }
 
 func init() {
-	listCmd.Flags().Bool("import-path", false, "print import paths only")
+	listCmd.Flags().Bool("package-path", false, "print package paths only")
 	rootCmd.AddCommand(listCmd)
 }
 
-func list(listImportPaths bool) error {
+func list(listPackagePaths bool) error {
 	pkgs, err := getPackageInfo()
 	if err != nil {
 		return err
@@ -44,8 +45,8 @@ func list(listImportPaths bool) error {
 		print.Fatal("unable to list up package: no package information")
 	}
 
-	if listImportPaths {
-		fmt.Println(ls.ImportPaths(pkgs))
+	if listPackagePaths {
+		fmt.Println(ls.PackagePaths(pkgs))
 	} else {
 		printPackageList(pkgs)
 	}
