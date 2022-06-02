@@ -15,37 +15,26 @@ import (
 	"github.com/Akimon658/gup/internal/print"
 )
 
-// GoPaths has $GOBIN and $GOPATH
 type GoPaths struct {
-	// GOBIN is $GOBIN
-	GOBIN string
-	// GOPATH is $GOPATH
+	GOBIN  string
 	GOPATH string
 	// TmpPath is tmporary path for dry run
 	TmpPath string
 }
 
-// Package is package information
 type Package struct {
-	// Name is package name
-	Name string
-	// ImportPath is import path for 'go install'
+	Name       string
 	ImportPath string
 	// ModulePath is path where go.mod is stored
 	ModulePath string
-	// Version store Package version (current and latest).
-	Version *Version
+	Version    *Version
 }
 
-// Version is package version information.
 type Version struct {
-	// Current(before update) version
 	Current string
-	// Latest(after update) version
-	Latest string
+	Latest  string
 }
 
-// NewVersion return Version instance.
 func NewVersion() *Version {
 	return &Version{
 		Current: "",
@@ -53,12 +42,10 @@ func NewVersion() *Version {
 	}
 }
 
-// SetCurrentVer set package current version.
 func (p *Package) SetCurrentVer() {
 	p.Version.Current = GetPackageVersion(p.Name)
 }
 
-// SetLatestVer set package latest version.
 func (p *Package) SetLatestVer() {
 	p.Version.Latest = GetPackageVersion(p.Name)
 }
@@ -79,12 +66,10 @@ func (p *Package) VersionCheckResultStr() string {
 	return "current: " + color.GreenString(p.Version.Current) + ", latest: " + color.YellowString(p.Version.Latest)
 }
 
-// IsAlreadyUpToDate return whether binary is already up to date or not.
 func IsAlreadyUpToDate(ver Version) bool {
 	return ver.Current == ver.Latest
 }
 
-// NewGoPaths return GoPaths instance.
 func NewGoPaths() *GoPaths {
 	return &GoPaths{
 		GOBIN:  goBin(),
@@ -92,7 +77,7 @@ func NewGoPaths() *GoPaths {
 	}
 }
 
-// StartDryRunMode change the GOBIN or GOPATH settings to install the binaries in the temporary directory.
+// StartDryRunMode changes the GOBIN or GOPATH settings to install the binaries in the temporary directory.
 func (gp *GoPaths) StartDryRunMode() error {
 	tmpDir, err := os.MkdirTemp("", "")
 	if err != nil {
@@ -113,7 +98,6 @@ func (gp *GoPaths) StartDryRunMode() error {
 	return nil
 }
 
-// EndDryRunMode restore the GOBIN or GOPATH settings.
 func (gp *GoPaths) EndDryRunMode() error {
 	if gp.GOBIN != "" {
 		if err := os.Setenv("GOBIN", gp.GOBIN); err != nil {
@@ -133,7 +117,6 @@ func (gp *GoPaths) EndDryRunMode() error {
 	return nil
 }
 
-// removeTmpDir remove tmporary directory for dry run
 func (gp *GoPaths) removeTmpDir() error {
 	if gp.TmpPath != "" {
 		if err := os.RemoveAll(gp.TmpPath); err != nil {
@@ -143,7 +126,6 @@ func (gp *GoPaths) removeTmpDir() error {
 	return nil
 }
 
-// Install execute "$ go install <importPath>@latest"
 func Install(importPath string) error {
 	if importPath == "command-line-arguments" {
 		return errors.New("is devel-binary copied from local environment")
@@ -154,7 +136,7 @@ func Install(importPath string) error {
 	return nil
 }
 
-// GetLatestVer execute "$ go list -m -f {{.Version}} <importPath>@latest"
+// GetLatestVer executes "go list -m -f {{.Version}} <importPath>@latest"
 func GetLatestVer(modulePath string) (string, error) {
 	out, err := exec.Command("go", "list", "-m", "-f", "{{.Version}}", modulePath+"@latest").Output()
 	if err != nil {
@@ -163,7 +145,6 @@ func GetLatestVer(modulePath string) (string, error) {
 	return strings.TrimRight(string(out), "\n"), nil
 }
 
-// goPath return GOPATH environment variable.
 func goPath() string {
 	gopath := os.Getenv("GOPATH")
 	if gopath != "" {
@@ -172,12 +153,10 @@ func goPath() string {
 	return build.Default.GOPATH
 }
 
-// goBin return GOBIN environment variable.
 func goBin() string {
 	return os.Getenv("GOBIN")
 }
 
-// GoBin return $GOPATH/bin directory path.
 func GoBin() (string, error) {
 	goBin := goBin()
 	if goBin != "" {
@@ -191,7 +170,7 @@ func GoBin() (string, error) {
 	return filepath.Join(goPath, "bin"), nil
 }
 
-// GoVersionWithOptionM return result of "$ go version -m"
+// GoVersionWithOptionM returns result of "go version -m"
 func GoVersionWithOptionM(bin string) ([]string, error) {
 	out, err := exec.Command("go", "version", "-m", bin).Output()
 	if err != nil {
@@ -200,7 +179,6 @@ func GoVersionWithOptionM(bin string) ([]string, error) {
 	return strings.Split(string(out), "\n"), nil
 }
 
-// BinaryPathList return list of binary paths.
 func BinaryPathList(path string) ([]string, error) {
 	entries, err := os.ReadDir(path)
 	if err != nil {
@@ -216,7 +194,6 @@ func BinaryPathList(path string) ([]string, error) {
 	return list, nil
 }
 
-// GetPackageInformation return golang package information.
 func GetPackageInformation(binList []string) []Package {
 	pkgs := []Package{}
 	for _, v := range binList {
@@ -239,7 +216,6 @@ func GetPackageInformation(binList []string) []Package {
 	return pkgs
 }
 
-// GetPackageVersion return golang package version
 func GetPackageVersion(cmdName string) string {
 	goBin, err := GoBin()
 	if err != nil {
@@ -254,11 +230,11 @@ func GetPackageVersion(cmdName string) string {
 	for _, v := range out {
 		vv := strings.TrimSpace(v)
 		if len(v) != len(vv) && strings.HasPrefix(vv, "mod") {
-			//         mod     github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//         mod     github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			v = strings.TrimLeft(vv, "mod")
 			v = strings.TrimSpace(v)
 
-			//github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			r := regexp.MustCompile(`^[^\s]+(\s)`)
 			v = r.ReplaceAllString(v, "")
 
@@ -272,7 +248,6 @@ func GetPackageVersion(cmdName string) string {
 	return "unknown"
 }
 
-// extractImportPath extract package import path from result of "$ go version -m".
 func extractImportPath(lines []string) string {
 	for _, v := range lines {
 		vv := strings.TrimSpace(v)
@@ -285,16 +260,15 @@ func extractImportPath(lines []string) string {
 	return ""
 }
 
-// extractModulePath extract package module path from result of "$ go version -m".
 func extractModulePath(lines []string) string {
 	for _, v := range lines {
 		vv := strings.TrimSpace(v)
 		if len(v) != len(vv) && strings.HasPrefix(vv, "mod") {
-			//         mod     github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//         mod     github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			v = strings.TrimLeft(vv, "mod")
 			v = strings.TrimSpace(v)
 
-			//github.com/Akimon658/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
+			//github.com/nao1215/subaru       v1.0.2  h1:LU9/1bFyqef3re6FVSFgTFMSXCZvrmDpmX3KQtlHzXA=
 			r := regexp.MustCompile(`(\s).*$`)
 			return r.ReplaceAllString(v, "")
 		}
