@@ -9,7 +9,7 @@ categories:
     label: bug
 
   - title: Docs
-    label: docs
+    label: documentation
 
   - title: Dependencies
     collapse-after: 3
