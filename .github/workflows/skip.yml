@@ -1,0 +1,14 @@
+name: Skip tests
+
+on:
+  pull_request:
+    paths-ignore:
+      - '**.go'
+      - go.mod
+      - go.sum
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'No test required'
