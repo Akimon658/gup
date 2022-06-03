@@ -80,7 +80,7 @@ func update(pkgs []goutil.Package, dryRun bool) int {
 		if p.ImportPath == "" {
 			err = fmt.Errorf(" %s is not installed by 'go install' (or permission incorrect)", p.Name)
 		} else {
-			if err = goutil.Install(p.ImportPath); err != nil {
+			if err = goutil.Install(p.ImportPath, p.BuildFlags); err != nil {
 				err = fmt.Errorf(" %s %w", p.Name, err)
 			}
 		}
@@ -150,7 +150,12 @@ func getPackageInfo() ([]goutil.Package, error) {
 		return nil, fmt.Errorf("%s: %w", "can't get binary-paths installed by 'go install'", err)
 	}
 
-	return goutil.GetPackageInformation(binList), nil
+	pkgs, err := goutil.GetPackageInformation(binList)
+	if err != nil {
+		return nil, err
+	}
+
+	return pkgs, nil
 }
 
 func extractUserSpecifyPkg(pkgs []goutil.Package, targets []string) []goutil.Package {
