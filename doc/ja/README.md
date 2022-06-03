@@ -1,38 +1,35 @@
-[![UnitTest](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml/badge.svg)](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml)
-[![reviewdog](https://github.com/Akimon658/gup/actions/workflows/reviewdog.yml/badge.svg)](https://github.com/Akimon658/gup/actions/workflows/reviewdog.yml)
-
-# gup とは 
+# gup
 
 ![demo](../img/demo.gif)
 
-**gup**コマンドは、`go install` でインストールしたバイナリを最新版にアップデートします。
+`gup` コマンドは、`go install` でインストールしたバイナリを最新版にアップデートします。
 gup は、すべてのバイナリを並列にアップデートするので、非常に高速です。
 \$GOPATH/bin (\$GOBIN) 以下にあるバイナリを操作するためのサブコマンドも提供しています。
 クロスプラットホームソフトであり、Windows、Mac、Linux で動作します。
-日本語版のみ、[Zenn](https://zenn.dev/articles/aef3fe318848d6/edit) に補足記事があります。
 
 ![sample](../img/sample.png)
 
 これは [nao1215/gup](https://github.com/nao1215/gup) のシンプルさに重点を置いたフォークです。
 
-# インストール方法
+## インストール方法
 
-### Step1. 前準備
+### ソースからのビルド（推奨）
 
-現在は、`go install` によるインストールのみをサポートしています。
-そのため、Golang の開発環境をシステムにインストールしていない場合、[Golang 公式サイト](https://go.dev/doc/install)から Golang をインストールしてください。
-
-### Step2. インストール
-
-```
-$ go install github.com/Akimon658/gup@latest
+```bash
+go install github.com/Akimon658/gup@latest
 ```
 
-# 使用方法
+### ビルド済みバイナリのダウンロード
+
+[リリースページ](https://github.com/Akimon658/gup/releases)からダウンロードできます。
+
+gup そのものは [Golang](https://go.dev/dl/) なしでインストールできますが、内部では `go` コマンドに依存しているため Go もインストールしておく必要があります。
+
+## 使用方法
 
 ### 全てのバイナリをアップデート
 
-全てのバイナリをアップデートしたい場合は、`gup update`を実行してください。
+全てのバイナリをアップデートしたい場合は、`gup update` を実行してください。
 
 ```
 $ gup update
@@ -91,8 +88,7 @@ gup:INFO : removed /home/nao/.go/bin/gal
 ### バイナリが最新版かどうかのチェック
 
 バイナリが最新版かどうかを知りたい場合は、`check` サブコマンドを使用してください。
-`check` サブコマンドは、バイナリが最新バージョンかどうかをチェックし、アップデートが必要なバイナリ名を表示します。
-しかし、更新はしません。
+`check` サブコマンドはバイナリの最新バージョンをチェックし、アップデートが必要なものを表示します。
 
 ```
 $ gup check
@@ -103,7 +99,7 @@ gup:INFO : [ 2/33] fyne.io/fyne/v2 (current:v2.1.3, latest:v2.1.4)
 gup:INFO : [33/33] github.com/nao1215/ubume (Already up-to-date: v1.5.0)
 
 gup:INFO : If you want to update binaries, the following command.
-           $ gup update fyne_demo gup mimixbox 
+           $ gup update fyne_demo gup mimixbox
 ```
 
 他のサブコマンドと同様、指定のバイナリのみをチェックする事もできます。
@@ -115,13 +111,13 @@ gup:INFO : [1/2] github.com/jesseduffield/lazygit (Already up-to-date: v0.32.2)
 gup:INFO : [2/2] github.com/nao1215/mimixbox (current: v0.32.1, latest: v0.33.2)
 
 gup:INFO : If you want to update binaries, the following command.
-           $ gup update mimixbox 
+           $ gup update mimixbox
 ```
 
-### エクスポート／インポートサブコマンド
+### エクスポート・インポート
 
 複数のシステム間で、$GOPATH/bin（もしくは$GOBIN）以下にあるバイナリを揃えたい場合、`export`/`import`サブコマンドを使ってください。
-`export` サブコマンドは、$HOME/.config/gup/gup.conf ファイルを生成し、このファイル内にはシステムにインストール済みのコマンド情報が記載されています。  
+`export` サブコマンドは、$HOME/.config/gup/gup.conf ファイルを生成し、このファイル内にはシステムにインストール済みのコマンド情報が記載されています。 
 別のシステム環境に$HOME/.config/gup/gup.conf ファイルを同じ階層にコピーした後、`import` サブコマンドを実行してください。
 gup コマンドは、gup.conf の内容に従ってインストールを開始します。
 
@@ -136,13 +132,7 @@ $ ls /home/nao/.config/gup/gup.conf
 $ gup import
 ```
 
-# 連絡先
-
-開発者に対して「バグ報告」や「機能の追加要望」がある場合は、コメントをください。
-その際、以下の連絡先を使用してください。
-
-- [GitHub Issue](https://github.com/Akimon658/gup/issues)
-
 # ライセンス
 
 gupプロジェクトは、[Apache License 2.0](./../../LICENSE) の下でライセンスされています。
+また、このリポジトリは [nao1215/gup](https://github.com/nao1215/gup) のフォークです。

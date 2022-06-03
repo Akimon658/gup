@@ -1,40 +1,38 @@
-[![UnitTest](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml/badge.svg)](https://github.com/Akimon658/gup/actions/workflows/unit_test.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Akimon658/gup)](https://goreportcard.com/report/github.com/Akimon658/gup)
-![GitHub](https://img.shields.io/github/license/Akimon658/gup)  
-[[日本語](./doc/ja/README.md)]  
+[[日本語](./doc/ja/README.md)]
 
-# gup - Update binaries installed by "go install"  
+# gup - Update binaries installed by `go install`
 
-![demo](./doc/img/demo.gif)  
+![demo](./doc/img/demo.gif)
 
-**gup** command update binaries installed by "go install" to the latest version.
-gup updates all binaries in parallel, so very fast.
+`gup` command updates binaries installed by `go install` to the latest version.
+It updates all binaries in parallel, so very fast.
 It also provides subcommands for manipulating binaries under \$GOPATH/bin (\$GOBIN).
 It is a cross-platform software that runs on Windows, Mac and Linux.
-[The release page](https://github.com/Akimon658/gup/releases) contains packages in .deb, .rpm, and .apk formats.  
 
 ![sample](./doc/img/sample.png)
 
 This is a fork of [nao1215/gup](https://github.com/nao1215/gup) that focuses on simplicity.
 
-# How to install
+## How to install
 
-### Step1. Install Golang
+### Build from source (recommended)
 
-gup command only supports installation with `go install`.
-If you does not have the Golang development environment installed on your system, please install Golang from the [Golang official website](https://go.dev/doc/install).
-
-### Step2. Install gup
-
-```
-$ go install github.com/Akimon658/gup@latest
+```bash
+go install github.com/Akimon658/gup@latest
 ```
 
-# How to use
+### Binary install
+
+Download from [Releases page](https://github.com/Akimon658/gup/releases).
+
+You can install gup without [Golang](https://go.dev/dl/), but you still need to install it as gup depends on the `go` command internally.
+
+## Usage
 
 ### Update all binaries
 
-If you update all binaries, you just run `gup update`.
+If you want to update all binaries, just run `gup update`.
 
 ```
 $ gup update
@@ -63,8 +61,8 @@ gup:INFO : [3/3] github.com/nao1215/ubume/cmd/ubume (Already up-to-date: v1.4.1)
 
 ### List up command name with package path and version under $GOPATH/bin
 
-`list` subcommand print command information under $GOPATH/bin or $GOBIN.
-The output information is the command name, package path, and command version.
+`list` subcommand prints command informations of binaries under $GOPATH/bin or $GOBIN.
+The output informations are the command name, package path, and command version.
 
 ![sample](doc/img/list.png)
 
@@ -93,7 +91,7 @@ gup:INFO : removed /home/nao/.go/bin/gal
 ### Check if the binary is the latest version
 
 If you want to know if the binary is the latest version, use the `check` subcommand.
-`check` subcommand checks if the binary is the latest version and displays the name of the binary that needs to be updated.
+`check` subcommand checks versions and displays the name of the binaries that need to be updated.
 
 ```
 $ gup check
@@ -119,7 +117,7 @@ gup:INFO : If you want to update binaries, the following command.
            $ gup update mimixbox 
 ```
 
-### Export/Import subcommand
+### Export/Import
 
 You use the `export`/`import` subcommand if you want to install the same Golang binaries across multiple systems.
 By default, `export` subcommand exports the file to $HOME/.config/gup/gup.conf.
@@ -142,12 +140,7 @@ $ gup import
 First off, thanks for taking the time to contribute!
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
-# Contact
-
-If you would like to send comments such as "find a bug" or "request for additional features" to the developer, please use one of the following contacts.
-
-- [GitHub Issue](https://github.com/Akimon658/gup/issues)
-
 # LICENSE
 
 The gup project is licensed under the terms of [the Apache License 2.0](./LICENSE).
+This is a fork repository of [nao1215/gup](https://github.com/nao1215/gup).
