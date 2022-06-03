@@ -10,8 +10,10 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/adrg/xdg"
 	"github.com/fatih/color"
 
+	"github.com/Akimon658/gup/config"
 	"github.com/Akimon658/gup/internal/print"
 )
 
@@ -28,6 +30,7 @@ type Package struct {
 	// ModulePath is path where go.mod is stored
 	ModulePath string
 	Version    *Version
+	BuildFlags *config.BuildFlags
 }
 
 type Version struct {
@@ -126,13 +129,15 @@ func (gp *GoPaths) removeTmpDir() error {
 	return nil
 }
 
-func Install(importPath string) error {
+func Install(importPath string, buildFlags *config.BuildFlags) error {
 	if importPath == "command-line-arguments" {
 		return errors.New("is devel-binary copied from local environment")
 	}
-	if err := exec.Command("go", "install", importPath+"@latest").Run(); err != nil {
+
+	if err := exec.Command("go", "install", "-ldflags", buildFlags.Ldflags, "-tags", buildFlags.Tags, importPath+"@latest").Run(); err != nil {
 		return fmt.Errorf("can't install %s: %w", importPath, err)
 	}
+
 	return nil
 }
 
@@ -194,26 +199,34 @@ func BinaryPathList(path string) ([]string, error) {
 	return list, nil
 }
 
-func GetPackageInformation(binList []string) []Package {
-	pkgs := []Package{}
+func GetPackageInformation(binList []string) ([]Package, error) {
+	var pkgs []Package
+	conf, err := config.Read(filepath.Join(xdg.ConfigHome, "gup", "package.yml"))
+	if err != nil {
+		return nil, err
+	}
+
 	for _, v := range binList {
 		out, err := GoVersionWithOptionM(v)
 		if err != nil {
 			print.Warn(fmt.Errorf("%s: %w", "can not get package path", err))
 			continue
 		}
-		path := extractImportPath(out)
-		mod := extractModulePath(out)
+
+		name := filepath.Base(v)
+
 		pkg := Package{
-			Name:       filepath.Base(v),
-			ImportPath: path,
-			ModulePath: mod,
+			Name:       name,
+			ImportPath: extractImportPath(out),
+			ModulePath: extractModulePath(out),
 			Version:    NewVersion(),
+			BuildFlags: conf.GetFlags(name),
 		}
 		pkg.SetCurrentVer()
 		pkgs = append(pkgs, pkg)
 	}
-	return pkgs
+
+	return pkgs, nil
 }
 
 func GetPackageVersion(cmdName string) string {
