@@ -116,23 +116,21 @@ gup:INFO : If you want to update binaries, the following command.
 
 ### エクスポート・インポート
 
-複数のシステム間で、$GOPATH/bin（もしくは$GOBIN）以下にあるバイナリを揃えたい場合、`export`/`import`サブコマンドを使ってください。
-`export` サブコマンドは、$HOME/.config/gup/gup.conf ファイルを生成し、このファイル内にはシステムにインストール済みのコマンド情報が記載されています。 
-別のシステム環境に$HOME/.config/gup/gup.conf ファイルを同じ階層にコピーした後、`import` サブコマンドを実行してください。
-gup コマンドは、gup.conf の内容に従ってインストールを開始します。
+新しい環境などに一括でコマンドをインストールしたいときには `export`/`import` サブコマンドを使うことができます。
 
-```
-※ 環境 A (e.g. ubuntu)
-$ gup export
-gup:INFO: Export /home/nao/.config/gup/gup.conf
+`export` サブコマンドはパッケージのパスを標準出力に表示するので、ファイルとして保存するにはリダイレクトを使ってください。
 
-※ 環境 B (e.g. debian)
-$ ls /home/nao/.config/gup/gup.conf
-/home/nao/.config/gup/gup.conf
-$ gup import
+```bash
+gup export > path/to/file
 ```
 
-# ライセンス
+エクスポートしたファイルをインストール先の環境にコピーしたら、`import` サブコマンドで全てインストールされます。
+
+```bash
+gup import path/to/file
+```
+
+## ライセンス
 
 gupプロジェクトは、[Apache License 2.0](./../../LICENSE) の下でライセンスされています。
 また、このリポジトリは [nao1215/gup](https://github.com/nao1215/gup) のフォークです。

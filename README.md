@@ -119,28 +119,27 @@ gup:INFO : If you want to update binaries, the following command.
 
 ### Export/Import
 
-You use the `export`/`import` subcommand if you want to install the same Golang binaries across multiple systems.
-By default, `export` subcommand exports the file to $HOME/.config/gup/gup.conf.
-After you have placed gup.conf in the same path hierarchy on another system, you execute `import` subcommand.
-gup start the installation according to the contents of gup.conf.
+You can use the `export`/`import` subcommands if you want to install the same Golang binaries across multiple systems.
 
-```
-※ Environmet A (e.g. ubuntu)
-$ gup export
-gup:INFO: Export /home/nao/.config/gup/gup.conf
+`export` subcommand prints package paths to stdout.
+To save it as a file, use redirect.
 
-※ Environmet B (e.g. debian)
-$ ls /home/nao/.config/gup/gup.conf
-/home/nao/.config/gup/gup.conf
-$ gup import
+```bash
+gup export > path/to/file
 ```
 
-# Contributing
+After you have copied the file to other environment, run `gup import`.
+
+```bash
+gup import path/to/file
+```
+
+## Contributing
 
 First off, thanks for taking the time to contribute!
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for more information.
 
-# LICENSE
+## LICENSE
 
 The gup project is licensed under the terms of [the Apache License 2.0](./LICENSE).
 This is a fork repository of [nao1215/gup](https://github.com/nao1215/gup).
