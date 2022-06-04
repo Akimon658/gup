@@ -134,6 +134,39 @@ After you have copied the file to other environment, run `gup import`.
 gup import path/to/file
 ```
 
+### Configuration
+
+You can define `ldflags` and `tags` to pass to `go install` by a YAML file.
+
+gup uses $XDG_CONFIG_HOME/gup/package.yml.
+If the environment variable is not defined, gup will use these directories instead.
+
+<details>
+  <summary>Fallback locations</summary>
+
+  |OS     |Location                     |
+  |:-----:|-----------------------------|
+  |Linux  |~/.config                    |
+  |macOS  |~/Library/Application Support|
+  |Windows|%LOCALAPPDATA%               |
+
+  For more details, see [adrg/xdg](https://github.com/adrg/xdg).
+</details>
+
+#### Example
+
+```yaml
+global:
+  ldflags: -s -w
+
+packages:
+  - name: hugo
+    ldflags: -s -w -X github.com/gohugoio/hugo/common/hugo.vendorInfo=akimon658
+    tags: extended
+```
+
+If `name` matches the command's name, it will override `global` settings.
+
 ## Contributing
 
 First off, thanks for taking the time to contribute!

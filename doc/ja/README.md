@@ -130,7 +130,39 @@ gup export > path/to/file
 gup import path/to/file
 ```
 
+### 設定
+
+`go install` に渡す `ldflags` と `tags` を YAML で定義することができます。
+
+デフォルトでは $XDG_CONFIG_HOME/gup/package.yml が使われますが、環境変数が定義されていない場合には以下のディレクトリが使われます。
+
+<details>
+  <summary>代替ディレクトリ</summary>
+
+  |OS     |ディレクトリ                 |
+  |:-----:|-----------------------------|
+  |Linux  |~/.config                    |
+  |macOS  |~/Library/Application Support|
+  |Windows|%LOCALAPPDATA%               |
+
+  詳しくは [adrg/xdg](https://github.com/adrg/xdg) をご覧ください。
+</details>
+
+#### 例
+
+```yaml
+global:
+  ldflags: -s -w
+
+packages:
+  - name: hugo
+    ldflags: -s -w -X github.com/gohugoio/hugo/common/hugo.vendorInfo=akimon658
+    tags: extended
+```
+
+`name` がコマンドの名前と一致した場合に `global` の設定を上書きします。
+
 ## ライセンス
 
-gupプロジェクトは、[Apache License 2.0](./../../LICENSE) の下でライセンスされています。
+gup プロジェクトは、[Apache License 2.0](./../../LICENSE) の下でライセンスされています。
 また、このリポジトリは [nao1215/gup](https://github.com/nao1215/gup) のフォークです。
