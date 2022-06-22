@@ -9,7 +9,7 @@ require (
 	github.com/harakeishi/curver v0.1.2
 	github.com/jaswdr/faker v1.11.0
 	github.com/mattn/go-colorable v0.1.12
-	github.com/spf13/cobra v1.4.0
+	github.com/spf13/cobra v1.5.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
