@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -42,6 +44,10 @@ func remove(args []string, force bool) int {
 
 	code := 0
 	for _, v := range args {
+		if runtime.GOOS == "windows" && !strings.HasSuffix(v, ".exe") {
+			v += ".exe"
+		}
+
 		target := filepath.Join(gobin, v)
 
 		if !file.IsFile(target) {
