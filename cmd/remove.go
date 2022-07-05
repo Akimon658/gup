@@ -62,7 +62,8 @@ func remove(args []string, force bool) int {
 			code = 1
 			continue
 		}
-		print.Info("removed " + target)
+
+		fmt.Println("removed " + target)
 	}
 	return code
 }

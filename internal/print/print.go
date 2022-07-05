@@ -45,25 +45,22 @@ func Fatal(err interface{}) {
 
 // Question displays the question in the terminal and receives an answer from the user.
 func Question(ask string) bool {
-	var response string
-
 	fmt.Print(ask + " [Y/n] ")
-	_, err := fmt.Scanln(&response)
-	if err != nil {
-		// If user input only enter.
-		if strings.Contains(err.Error(), "expected newline") {
-			return Question(ask)
-		}
+
+	var input string
+	_, err := fmt.Scanln(&input)
+	if err != nil && !strings.Contains(err.Error(), "expected newline") {
 		fmt.Fprint(os.Stderr, err.Error())
 		return false
 	}
 
-	switch strings.ToLower(response) {
-	case "y", "yes":
+	switch strings.ToLower(input) {
+	case "y", "yes", "":
 		return true
 	case "n", "no":
 		return false
 	default:
+		fmt.Println("Prease enter y or n")
 		return Question(ask)
 	}
 }
