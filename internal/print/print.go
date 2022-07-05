@@ -5,9 +5,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/Akimon658/gup/internal/cmdinfo"
 	"github.com/fatih/color"
 	"github.com/mattn/go-colorable"
+
+	"github.com/Akimon658/gup/internal/cmdinfo"
 )
 
 var (
@@ -46,8 +47,7 @@ func Fatal(err interface{}) {
 func Question(ask string) bool {
 	var response string
 
-	fmt.Fprintf(Stdout, "%s:%s: %s",
-		cmdinfo.Name, color.GreenString("CHECK"), ask+" [Y/n] ")
+	fmt.Print(ask + " [Y/n] ")
 	_, err := fmt.Scanln(&response)
 	if err != nil {
 		// If user input only enter.
