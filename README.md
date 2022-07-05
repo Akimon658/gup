@@ -69,23 +69,23 @@ The output informations are the command name, package path, and command version.
 ### Remove the specified binary
 
 If you want to remove a command under $GOPATH/bin or $GOBIN, use the `remove` subcommand.
-The `remove` subcommand asks if you want to remove it before removing it.
+It asks whether you want to remove it before removing it.
 
 ```
 $ gup remove subaru gal ubume
-gup:CHECK: remove /home/nao/.go/bin/subaru? [Y/n] Y
-gup:INFO : removed /home/nao/.go/bin/subaru
-gup:CHECK: remove /home/nao/.go/bin/gal? [Y/n] n
-gup:INFO : cancel removal /home/nao/.go/bin/gal
-gup:CHECK: remove /home/nao/.go/bin/ubume? [Y/n] Y
-gup:INFO : removed /home/nao/.go/bin/ubume
+Do you want to remove /home/nao/.go/bin/subaru? [Y/n] y
+Removed /home/nao/.go/bin/subaru
+Do you want to remove /home/nao/.go/bin/gal? [Y/n] n
+Removal cancelled
+Do you want to remove /home/nao/.go/bin/ubume? [Y/n] y
+Removed /home/nao/.go/bin/ubume
 ```
 
 If you want to force the removal, use the `--force` option.
 
 ```
 $ gup remove --force gal
-gup:INFO : removed /home/nao/.go/bin/gal
+Removed /home/nao/.go/bin/gal
 ```
 
 ### Check if the binary is the latest version
