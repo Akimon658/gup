@@ -14,8 +14,8 @@ import (
 
 var removeCmd = &cobra.Command{
 	Use:   "remove",
-	Short: "Remove the binary under $GOPATH/bin or $GOBIN",
-	Long: `Remove command in $GOPATH/bin or $GOBIN.
+	Short: "Remove binaries under $GOPATH/bin or $GOBIN",
+	Long: `Remove commands in $GOPATH/bin or $GOBIN.
 If you want to specify multiple binaries at once, separate them with space.
 [e.g.] gup remove a_cmd b_cmd c_cmd`,
 	Args: cobra.MinimumNArgs(1),
@@ -51,8 +51,8 @@ func remove(args []string, force bool) int {
 		}
 
 		if !force {
-			if !print.Question(fmt.Sprintf("remove %s?", target)) {
-				print.Info("cancel removal " + target)
+			if !print.Question(fmt.Sprintf("Do you want to remove %s?", target)) {
+				fmt.Println("removal cancelled")
 				continue
 			}
 		}
