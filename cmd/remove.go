@@ -58,7 +58,7 @@ func remove(args []string, force bool) int {
 
 		if !force {
 			if !print.Question(fmt.Sprintf("Do you want to remove %s?", target)) {
-				fmt.Println("removal cancelled")
+				fmt.Println("Removal cancelled")
 				continue
 			}
 		}
@@ -69,7 +69,7 @@ func remove(args []string, force bool) int {
 			continue
 		}
 
-		fmt.Println("removed " + target)
+		fmt.Println("Removed " + target)
 	}
 	return code
 }

@@ -70,19 +70,19 @@ gup:INFO : [3/3] github.com/nao1215/ubume/cmd/ubume (Already up-to-date: v1.4.1)
 
 ```
 $ gup remove subaru gal ubume
-gup:CHECK: remove /home/nao/.go/bin/subaru? [Y/n] Y
-gup:INFO : removed /home/nao/.go/bin/subaru
-gup:CHECK: remove /home/nao/.go/bin/gal? [Y/n] n
-gup:INFO : cancel removal /home/nao/.go/bin/gal
-gup:CHECK: remove /home/nao/.go/bin/ubume? [Y/n] Y
-gup:INFO : removed /home/nao/.go/bin/ubume
+Do you want to remove /home/nao/.go/bin/subaru? [Y/n] y
+Removed /home/nao/.go/bin/subaru
+Do you want to remove /home/nao/.go/bin/gal? [Y/n] n
+Removal cancelled
+Do you want to remove /home/nao/.go/bin/ubume? [Y/n] y
+Removed /home/nao/.go/bin/ubume
 ```
 
 確認無しで削除したい場合は, `--force` オプションを使用してください。
 
 ```
 $ gup remove --force gal
-gup:INFO : removed /home/nao/.go/bin/gal
+Removed /home/nao/.go/bin/gal
 ```
 
 ### バイナリが最新版かどうかのチェック
