@@ -10,6 +10,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/Akimon658/gup/file"
 	"github.com/Akimon658/gup/internal/goutil"
 	"github.com/Akimon658/gup/internal/print"
 	"github.com/Akimon658/gup/internal/slice"
@@ -164,10 +165,14 @@ func extractUserSpecifyPkg(pkgs []goutil.Package, targets []string) []goutil.Pac
 	if len(targets) == 0 {
 		return pkgs
 	}
-	for _, v := range pkgs {
-		if slice.Contains(targets, v.Name) {
-			result = append(result, v)
-			tmp = append(tmp, v.Name)
+
+	for _, v := range targets {
+		v = file.Extension(v)
+		for _, w := range pkgs {
+			if v == w.Name {
+				result = append(result, w)
+				tmp = append(tmp, w.Name)
+			}
 		}
 	}
 
@@ -178,5 +183,6 @@ func extractUserSpecifyPkg(pkgs []goutil.Package, targets []string) []goutil.Pac
 			}
 		}
 	}
+
 	return result
 }

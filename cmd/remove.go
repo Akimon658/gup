@@ -4,11 +4,10 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"runtime"
-	"strings"
 
 	"github.com/spf13/cobra"
 
+	"github.com/Akimon658/gup/file"
 	"github.com/Akimon658/gup/internal/goutil"
 	"github.com/Akimon658/gup/internal/print"
 )
@@ -43,9 +42,7 @@ func remove(args []string, force bool) int {
 
 	code := 0
 	for _, v := range args {
-		if runtime.GOOS == "windows" && !strings.HasSuffix(v, ".exe") {
-			v += ".exe"
-		}
+		v = file.Extension(v)
 
 		target := filepath.Join(gobin, v)
 		stat, err := os.Stat(target)
