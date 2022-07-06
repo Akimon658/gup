@@ -9,7 +9,6 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/Akimon658/gup/internal/file"
 	"github.com/Akimon658/gup/internal/goutil"
 	"github.com/Akimon658/gup/internal/print"
 )
@@ -49,9 +48,15 @@ func remove(args []string, force bool) int {
 		}
 
 		target := filepath.Join(gobin, v)
+		stat, err := os.Stat(target)
+		if err != nil {
+			print.Err(err)
+			code = 1
+			continue
+		}
 
-		if !file.IsFile(target) {
-			print.Err(fmt.Errorf("no such file or directory: %s", target))
+		if stat.IsDir() {
+			print.Err(fmt.Errorf("no such file: %s", target))
 			code = 1
 			continue
 		}
