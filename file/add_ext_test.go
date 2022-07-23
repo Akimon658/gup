@@ -7,7 +7,7 @@ import (
 	"github.com/jaswdr/faker"
 )
 
-func TestExtension(t *testing.T) {
+func TestAddExt(t *testing.T) {
 	fileName := faker.New().Lorem().Word()
 	fileNameWithExtension := fileName + extWin
 	testCases := []struct {
@@ -29,7 +29,7 @@ func TestExtension(t *testing.T) {
 
 	for _, v := range testCases {
 		t.Run(v.name, func(t *testing.T) {
-			result := Extension(v.input)
+			result := AddExt(v.input)
 			if runtime.GOOS == "windows" {
 				if result != v.expected {
 					t.Errorf("expected %s, got %s", v.expected, result)

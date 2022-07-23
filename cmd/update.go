@@ -167,7 +167,7 @@ func extractUserSpecifyPkg(pkgs []goutil.Package, targets []string) []goutil.Pac
 	}
 
 	for _, v := range targets {
-		v = file.Extension(v)
+		v = file.AddExt(v)
 		for _, w := range pkgs {
 			if v == w.Name {
 				result = append(result, w)

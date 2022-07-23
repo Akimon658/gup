@@ -7,7 +7,7 @@ import (
 
 const extWin = ".exe"
 
-func Extension(name string) string {
+func AddExt(name string) string {
 	if runtime.GOOS == "windows" && !strings.HasSuffix(name, extWin) {
 		name += extWin
 	}
