@@ -11,8 +11,8 @@ github.com/harakeishi/curver v0.1.2 h1:jyPmANcNfpZIau+MJZ+cXAm8E5Hutl5EvItugaBuQ
 github.com/harakeishi/curver v0.1.2/go.mod h1:G8ZUue/D5LVD1MFMv8bcsrn1SdwL/LbnqC+BFoFuVJw=
 github.com/inconshreveable/mousetrap v1.0.0 h1:Z8tu5sraLXCXIcARxBp/8cbvlwVa7Z1NHg9XEKhtSvM=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
-github.com/jaswdr/faker v1.12.0 h1:CpVK7eKerb2nuaSPv7KLJ/wPRlF6CoVeDg5TzatwuBE=
-github.com/jaswdr/faker v1.12.0/go.mod h1:x7ZlyB1AZqwqKZgyQlnqEG8FDptmHlncA5u2zY/yi6w=
+github.com/jaswdr/faker v1.13.0 h1:m105Lmefrs4vAGZthEqd+XC3CLbueBuE4iL2nWNByYM=
+github.com/jaswdr/faker v1.13.0/go.mod h1:x7ZlyB1AZqwqKZgyQlnqEG8FDptmHlncA5u2zY/yi6w=
 github.com/mattn/go-colorable v0.1.9/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=
 github.com/mattn/go-colorable v0.1.12 h1:jF+Du6AlPIjs2BiUiQlKOX0rt3SujHxPnksPKZbaA40=
 github.com/mattn/go-colorable v0.1.12/go.mod h1:u5H1YNBxpqRaxsYJYSkiCWKzEfiAb1Gb520KVy5xxl4=
