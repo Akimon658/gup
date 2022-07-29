@@ -8,9 +8,17 @@ import (
 const extWin = ".exe"
 
 func AddExt(name string) string {
-	if runtime.GOOS == "windows" && !strings.HasSuffix(name, extWin) {
+	if isWindows() && !hasExt(name) {
 		name += extWin
 	}
 
 	return name
+}
+
+func hasExt(name string) bool {
+	return strings.HasSuffix(name, extWin)
+}
+
+func isWindows() bool {
+	return runtime.GOOS == "windows"
 }

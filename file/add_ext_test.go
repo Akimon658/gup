@@ -1,43 +1,54 @@
 package file
 
 import (
-	"runtime"
+	"os"
 	"testing"
 
 	"github.com/jaswdr/faker"
 )
 
+type testCase struct {
+	name     string
+	input    string
+	expected string
+}
+
+var (
+	withExt    string
+	withoutExt string
+)
+
+func TestMain(m *testing.M) {
+	withoutExt = faker.New().Lorem().Word()
+	withExt = withoutExt + extWin
+
+	os.Exit(m.Run())
+}
+
 func TestAddExt(t *testing.T) {
-	fileName := faker.New().Lorem().Word()
-	fileNameWithExtension := fileName + extWin
-	testCases := []struct {
-		name     string
-		input    string
-		expected string
-	}{
+	testCases := []testCase{
 		{
 			name:     "without extension",
-			input:    fileName,
-			expected: fileNameWithExtension,
+			input:    withoutExt,
+			expected: withExt,
 		},
 		{
 			name:     "with extension",
-			input:    fileNameWithExtension,
-			expected: fileNameWithExtension,
+			input:    withExt,
+			expected: withExt,
 		},
 	}
 
 	for _, v := range testCases {
 		t.Run(v.name, func(t *testing.T) {
 			result := AddExt(v.input)
-			if runtime.GOOS == "windows" {
+
+			if isWindows() {
 				if result != v.expected {
 					t.Errorf("expected %s, got %s", v.expected, result)
 				}
-			} else {
-				if result != v.input {
-					t.Errorf("expected %s, got %s", v.input, result)
-				}
+			} else if result != v.input {
+				t.Errorf("expected %s, got %s", v.input, result)
 			}
 		})
 	}
