@@ -42,7 +42,7 @@ func remove(args []string, force bool) int {
 
 	code := 0
 	for _, v := range args {
-		v = file.Extension(v)
+		v = file.AddExt(v)
 
 		target := filepath.Join(gobin, v)
 		stat, err := os.Stat(target)

@@ -7,6 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/Akimon658/gup/file"
 	"github.com/Akimon658/gup/internal/goutil"
 	"github.com/Akimon658/gup/internal/print"
 )
@@ -99,10 +100,8 @@ func printUpdatablePkgInfo(pkgs []goutil.Package) {
 
 	var p string
 	for _, v := range pkgs {
-		p += v.Name + " "
+		p += file.TrimExt(v.Name) + " "
 	}
 	fmt.Println("")
-	print.Info("If you want to update binaries, run the following command.\n" +
-		strings.Repeat(" ", 11) +
-		"$ gup update " + p)
+	print.Info("If you want to update binaries, run the following command.\n" + strings.Repeat(" ", 11) + "gup update " + p)
 }
