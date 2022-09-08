@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/adrg/xdg v0.4.0
 	github.com/fatih/color v1.13.0
-	github.com/google/go-cmp v0.5.8
+	github.com/google/go-cmp v0.5.9
 	github.com/harakeishi/curver v0.1.2
 	github.com/jaswdr/faker v1.12.0
 	github.com/mattn/go-colorable v0.1.12
